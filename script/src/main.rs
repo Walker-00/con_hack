@@ -1,7 +1,7 @@
 use std::{
     fs,
     io::{stdin, Write},
-    process::Command,
+    process::{Command, Stdio},
 };
 
 fn main() {
@@ -13,12 +13,14 @@ fn main() {
         file.write_all(b"b").unwrap();
         Command::new("git")
             .args(["add", "-A"])
+            .stdout(Stdio::null())
             .spawn()
             .unwrap()
             .wait()
             .unwrap();
         Command::new("git")
             .args(["commit", "-m", "\"hackk\""])
+            .stdout(Stdio::null())
             .spawn()
             .unwrap()
             .wait()
