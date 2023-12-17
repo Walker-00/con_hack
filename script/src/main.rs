@@ -7,12 +7,21 @@ fn main() {
     for _ in 0..count.trim().parse().unwrap() {
         Command::new("echo")
             .args(["\"b\"", ">>", "d"])
-            .output()
+            .spawn()
+            .unwrap()
+            .wait()
             .unwrap();
-        Command::new("git").args(["add", "-A"]).output().unwrap();
+        Command::new("git")
+            .args(["add", "-A"])
+            .spawn()
+            .unwrap()
+            .wait()
+            .unwrap();
         Command::new("git")
             .args(["commit", "-m", "\"hackk\""])
-            .output()
+            .spawn()
+            .unwrap()
+            .wait()
             .unwrap();
     }
 }
